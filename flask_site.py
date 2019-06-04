@@ -1,6 +1,4 @@
 from flask import Flask, Blueprint, request, jsonify, render_template, redirect
-from flask_sqlalchemy import SQLAlchemy
-from flask_marshmallow import Marshmallow
 import os, requests, json
 import random
 
@@ -14,4 +12,4 @@ def home():
 def tickets():
     response = requests.get("http://localhost:5000/ticketView")
     data = json.loads(response.text)
-    return render_template('removebooks.html', tickets = data)
+    return render_template('tickets.html', tickets = data)

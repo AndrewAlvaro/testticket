@@ -3,7 +3,10 @@
         <div class="jumbotron text-center">
             <h1>Tickets</h1>
             <table class="table text-center">
+                
                 <tr>
+                    <th>ID</th>
+                    <th>Status</th>
                     <th>Requester ID</th>
                     <th>Assignee ID</th>
                     <th>Subject</th>
@@ -13,13 +16,18 @@
             
                 {% for ticket in tickets %}
                     <tr>
-                        <td>{{ ticket.ticket.id }}</td>
-                        <td>{{ ticket.ticket.subject }}</td>
-                        <td>{{ ticket.ticket.status}}</td>
-                        
+                        <td><a href="#">{{ tickets.id }}</a></td>
+                        <td>{{ tickets.status }}</td>
+                        <td>{{ tickets.requestID }}</td>
+                        <td>{{ tickets.assignID }}</td>
+                        <td>{{ tickets.subject }}</td>
+                        <td>{{ tickets.description }}</td>
+                        <td>{{ tickets.tags }} </td>
+                      
                     </tr>
-            
-                {% endfor %}-->
+                {% endfor %}
+
             </table>
         </div>
     {% endblock %}
+  
