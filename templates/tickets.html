@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+    {% block body %}
+        <div class="jumbotron text-center">
+            <h1>Tickets</h1>
+            <table class="table text-center">
+                <tr>
+                    <th>Requester ID</th>
+                    <th>Assignee ID</th>
+                    <th>Subject</th>
+                    <th>Description</th>
+                    <th>Tags</th>
+                </tr>
+            
+                {% for ticket in tickets %}
+                    <tr>
+                        <td>{{ ticket.ticket.id }}</td>
+                        <td>{{ ticket.ticket.subject }}</td>
+                        <td>{{ ticket.ticket.status}}</td>
+                        
+                    </tr>
+            
+                {% endfor %}-->
+            </table>
+        </div>
+    {% endblock %}
