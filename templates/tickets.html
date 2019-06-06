@@ -14,9 +14,19 @@
                     <th>Tags</th>
                 </tr>
             
-                {% for ticket in tickets %}
                     <tr>
-                        <td><a href="#">{{ tickets.id }}</a></td>
+                        <td><a href="/singleTicket/{{tickets.id}}">{{ tickets.id }}</a></td>
+                        <!--
+                        {% block content %}
+                            {% if tickets.status == "open" %}
+                                <td style="color:green">open</td>
+                            
+                            {% else %}
+                                <td style="color:red">close</td>
+                            
+                            {% endif %}
+                        {% endblock content %}
+                        -->
                         <td>{{ tickets.status }}</td>
                         <td>{{ tickets.requestID }}</td>
                         <td>{{ tickets.assignID }}</td>
@@ -25,7 +35,6 @@
                         <td>{{ tickets.tags }} </td>
                       
                     </tr>
-                {% endfor %}
 
             </table>
         </div>

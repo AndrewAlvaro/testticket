@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+    {% block body %}
+        <div class="jumbotron text-center">
+            <h1>Ticket</h1>
+            <table class="table text-center">
+                    <tr>
+                            <th>ID</th>
+                            <th>Status</th>
+                            <th>Requester ID</th>
+                            <th>Assignee ID</th>
+                            <th>Subject</th>
+                            <th>Description</th>
+                            <th>Tags</th>
+                        </tr>
+                    
+            
+                            <tr>
+                                <td>{{ ticket.id }}</a></td>
+                                <td>{{ ticket.status }}</td>
+                                <td>{{ ticket.requestID }}</td>
+                                <td>{{ ticket.assignID }}</td>
+                                <td>{{ ticket.subject }}</td>
+                                <td>{{ ticket.description }}</td>
+                                <td>{{ ticket.tags }} </td>
+                              
+                            </tr>
+         
+            </table>
+        </div>
+    {% endblock %}

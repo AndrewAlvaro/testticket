@@ -19,7 +19,7 @@ zenpy_client = Zenpy(**creds)
 
 @api.route("/ticketView", methods = ["GET"])
 def showTicket():
-
+    
     for ticket in zenpy_client.tickets():
         data = ticket.to_dict()
     
@@ -32,6 +32,24 @@ def showTicket():
     tags = data['tags']
 
     tickets = {"id": id, "status": status, "requestID": requestID, "assignID": assignID, "subject": subject, "description": description, "tags": tags}
+    
+    return jsonify(tickets)
+    #return data
+
+@api.route("/api/ticketID/<id>")
+def showSingleTicket(id):
+    ticket = zenpy_client.tickets(id=id)
+    data = ticket.to_dict()
+
+
+    id = data['id']
+    status = data['status']
+    requestID = data['requester_id']
+    assignID = data['assignee_id']
+    subject = data['subject']
+    description = data['description']
+    tags = data['tags']
+
+    tickets = {"id": id, "status": status, "requestID": requestID, "assignID": assignID, "subject": subject, "description": description, "tags": tags}
 
     return jsonify(tickets)
-
