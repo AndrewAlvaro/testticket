@@ -19,7 +19,7 @@
             
                 {% for ticket in tickets %}
                     <tr onclick=" document.location = '/singleTicket/{{ticket.id}}' ">
-                        <td>{{ ticket.id }}</td>
+                        <td><a href="/singleTicket/{{ticket.id}}">{{ ticket.id }}</a></td>
                         
                         
                             {% if ticket.status == "new" %}

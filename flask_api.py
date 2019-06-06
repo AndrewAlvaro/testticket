@@ -24,12 +24,7 @@ def showTicket():
     response = requests.get(url, auth=(user, pwd))
 
     datas = response.json()
-
-    #for ticket in zenpy_client.tickets():
-    #    data = ticket.to_dict()
     in_data = datas['tickets']
-    #ticket = zenpy_client.tickets()
-    #data = ticket[:4000]
     
     ticketz = []
     for data in in_data:
@@ -45,12 +40,8 @@ def showTicket():
         
         ticketz.append(tickets)
 
-
-        #tickets = {"id": id, "status": status, "requestID": requester_id, "assignID": assignee_id, "subject": subject, "description": description, "tags": tags}
-    #result = json.dumps(ticketz)
-    
     return jsonify(ticketz)
-    #return data
+    
 
 @api.route("/api/ticketID/<id>")
 def showSingleTicket(id):
