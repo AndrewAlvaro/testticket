@@ -14,26 +14,42 @@ creds = {
     'subdomain': 'testticket2019'
 }
 
-
 zenpy_client = Zenpy(**creds)
 
 @api.route("/ticketView", methods = ["GET"])
 def showTicket():
-    
-    for ticket in zenpy_client.tickets():
-        data = ticket.to_dict()
-    
-    id = data['id']
-    status = data['status']
-    requestID = data['requester_id']
-    assignID = data['assignee_id']
-    subject = data['subject']
-    description = data['description']
-    tags = data['tags']
+    url = 'https://testticket2019.zendesk.com/api/v2/tickets.json'
+    user = 'andrew.alvaro10@gmail.com' + '/token'
+    pwd = 'hHp0kBgaMfdtDGwKYJMLSfCNBkXH5r9zznYoiOjP'
+    response = requests.get(url, auth=(user, pwd))
 
-    tickets = {"id": id, "status": status, "requestID": requestID, "assignID": assignID, "subject": subject, "description": description, "tags": tags}
+    datas = response.json()
+
+    #for ticket in zenpy_client.tickets():
+    #    data = ticket.to_dict()
+    in_data = datas['tickets']
+    #ticket = zenpy_client.tickets()
+    #data = ticket[:4000]
     
-    return jsonify(tickets)
+    ticketz = []
+    for data in in_data:
+        tickets = dict()
+        
+        tickets['id'] = data['id']
+        tickets['status'] = data['status']
+        tickets['requestID'] = data['requester_id']
+        tickets['assignID'] = data['assignee_id']
+        tickets['subject'] = data['subject']
+        tickets['description'] = data['description']
+        tickets['tags'] = data['tags']
+        
+        ticketz.append(tickets)
+
+
+        #tickets = {"id": id, "status": status, "requestID": requester_id, "assignID": assignee_id, "subject": subject, "description": description, "tags": tags}
+    #result = json.dumps(ticketz)
+    
+    return jsonify(ticketz)
     #return data
 
 @api.route("/api/ticketID/<id>")
@@ -49,7 +65,9 @@ def showSingleTicket(id):
     subject = data['subject']
     description = data['description']
     tags = data['tags']
+    created_at = data['created_at']
+    updated_at = data['updated_at']
 
-    tickets = {"id": id, "status": status, "requestID": requestID, "assignID": assignID, "subject": subject, "description": description, "tags": tags}
+    tickets = {"id": id, "status": status, "requestID": requestID, "assignID": assignID, "subject": subject, "description": description, "tags": tags, "created_at": created_at, "updated_at": updated_at}
 
     return jsonify(tickets)

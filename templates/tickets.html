@@ -1,7 +1,9 @@
 {% extends 'layout.html' %}
     {% block body %}
+        
         <div class="jumbotron text-center">
             <h1>Tickets</h1>
+            <p>Click on the ticket row to display more information</p>
             <table class="table text-center">
                 
                 <tr>
@@ -13,29 +15,44 @@
                     <th>Description</th>
                     <th>Tags</th>
                 </tr>
+                {% block content %}
             
-                    <tr>
-                        <td><a href="/singleTicket/{{tickets.id}}">{{ tickets.id }}</a></td>
-                        <!--
-                        {% block content %}
-                            {% if tickets.status == "open" %}
-                                <td style="color:green">open</td>
+                {% for ticket in tickets %}
+                    <tr onclick=" document.location = '/singleTicket/{{ticket.id}}' ">
+                        <td>{{ ticket.id }}</td>
+                        
+                        
+                            {% if ticket.status == "new" %}
+                                <td style="color:green">New</td>
                             
+                            {% elif ticket.status == "open" %}
+                                <td style="color:green">Open</td>
+
+                            {% elif ticket.status == "solved" %}
+                                <td style="color:green">Solved</td>
+                            
+                            {% elif ticket.status == "pending" %}
+                                <td style="color:yellow">Pending</td>
+
+                            {% elif ticket.status == "onhold" %}
+                                <td style="color:yellow">On-hold</td>
+
                             {% else %}
-                                <td style="color:red">close</td>
+                                <td style="color:red">Close</td>
                             
                             {% endif %}
-                        {% endblock content %}
-                        -->
-                        <td>{{ tickets.status }}</td>
-                        <td>{{ tickets.requestID }}</td>
-                        <td>{{ tickets.assignID }}</td>
-                        <td>{{ tickets.subject }}</td>
-                        <td>{{ tickets.description }}</td>
-                        <td>{{ tickets.tags }} </td>
+                        
+                        
+                        
+                        <td>{{ ticket.requestID }}</td>
+                        <td>{{ ticket.assignID }}</td>
+                        <td>{{ ticket.subject }}</td>
+                        <td>{{ ticket.description }}</td>
+                        <td>{{ ticket.tags }} </td>
                       
                     </tr>
-
+                {% endfor %}
+                {% endblock content %}
             </table>
         </div>
     {% endblock %}
