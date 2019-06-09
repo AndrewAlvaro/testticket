@@ -1,4 +1,5 @@
 from flask import Flask, Blueprint, request, jsonify, render_template, redirect
+from flask_paginate import Pagination, get_page_parameter, get_page_args
 import os, requests, json
 import random
 
@@ -10,9 +11,21 @@ def home():
 
 @site.route('/tickets')
 def tickets():
+    search = False
     response = requests.get("http://localhost:5000/ticketView")
     data = json.loads(response.text)
-    return render_template('tickets.html', tickets = data)
+    
+    per_page = 25
+
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    offset = (page - 1) * per_page
+
+    datas = data[offset:offset + per_page]
+
+    pagination = Pagination(page=page, per_page= per_page, total=len(data), search=search, record_name='data', css_framework='bootstrap4')
+
+    return render_template('tickets.html', tickets = datas, pagination = pagination)
+    #return render_template('tickets.html', tickets = data)
 
 @site.errorhandler(500)
 def could_not_auth(e):
