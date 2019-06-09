@@ -11,23 +11,17 @@ api = Blueprint("api", __name__)
 creds = {
     'email' : 'andrew.alvaro10@gmail.com',
     'token' : 'hHp0kBgaMfdtDGwKYJMLSfCNBkXH5r9zznYoiOjP',
-    'subdomain': 'testticket2019'
+    'subdomain' : 'testticket2019'
 }
 
 zenpy_client = Zenpy(**creds)
 
 @api.route("/ticketView", methods = ["GET"])
 def showTicket():
-    url = 'https://testticket2019.zendesk.com/api/v2/tickets.json'
-    user = 'andrew.alvaro10@gmail.com' + '/token'
-    pwd = 'hHp0kBgaMfdtDGwKYJMLSfCNBkXH5r9zznYoiOjP'
-    response = requests.get(url, auth=(user, pwd))
-
-    datas = response.json()
-    in_data = datas['tickets']
     
     ticketz = []
-    for data in in_data:
+    for datas in zenpy_client.tickets():
+        data = datas.to_dict()
         tickets = dict()
         
         tickets['id'] = data['id']
@@ -47,7 +41,6 @@ def showTicket():
 def showSingleTicket(id):
     ticket = zenpy_client.tickets(id=id)
     data = ticket.to_dict()
-
 
     id = data['id']
     status = data['status']

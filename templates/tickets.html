@@ -4,6 +4,7 @@
         <div class="jumbotron text-center">
             <h1>Tickets</h1>
             <p>Click on the ticket row to display more information</p>
+            {{ pagination.info }}
             <table class="table text-center">
                 
                 <tr>
@@ -12,7 +13,6 @@
                     <th>Requester ID</th>
                     <th>Assignee ID</th>
                     <th>Subject</th>
-                    <th>Description</th>
                     <th>Tags</th>
                 </tr>
                 {% block content %}
@@ -47,13 +47,13 @@
                         <td>{{ ticket.requestID }}</td>
                         <td>{{ ticket.assignID }}</td>
                         <td>{{ ticket.subject }}</td>
-                        <td>{{ ticket.description }}</td>
                         <td>{{ ticket.tags }} </td>
                       
                     </tr>
                 {% endfor %}
                 {% endblock content %}
             </table>
+            {{ pagination.links }}
         </div>
     {% endblock %}
   
