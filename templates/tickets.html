@@ -23,7 +23,7 @@
                         
                         
                             {% if ticket.status == "new" %}
-                                <td style="color:green">New</td>
+                                <td style="color:green">*New</td>
                             
                             {% elif ticket.status == "open" %}
                                 <td style="color:green">Open</td>
@@ -37,9 +37,11 @@
                             {% elif ticket.status == "onhold" %}
                                 <td style="color:yellow">On-hold</td>
 
-                            {% else %}
+                            {% elif ticket.status == "close" %}
                                 <td style="color:red">Close</td>
                             
+                            {% else %}
+                                <td style="color:red">Status error</td>
                             {% endif %}
                         
                         
@@ -53,7 +55,7 @@
                 {% endfor %}
                 {% endblock content %}
             </table>
-            {{ pagination.links }}
+            <ul class="justify-content-center">{{ pagination.links }}</ul>
         </div>
     {% endblock %}
   
