@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+    {% block body %}
+        
+        <div class="jumbotron text-center">
+            <h1>Tickets</h1>
+            <p>Click on the ticket row to display more information</p>
+            {{ pagination.info }}
+            <table class="table text-center">
+                
+                <tr>
+                    <th>ID</th>
+                    <th>Status</th>
+                    <th>Requester ID</th>
+                    <th>Assignee ID</th>
+                    <th>Subject</th>
+                    <th>Tags</th>
+                </tr>
+                {% block content %}
+            
+                {% for ticket in tickets %}
+                    <tr onclick=" document.location = '/singleTicket/{{ticket.id}}' ">
+                        <td><a href="/singleTicket/{{ticket.id}}">{{ ticket.id }}</a></td>
+                        
+                        
+                            {% if ticket.status == "new" %}
+                                <td style="color:green">*New</td>
+                            
+                            {% elif ticket.status == "open" %}
+                                <td style="color:green">Open</td>
+
+                            {% elif ticket.status == "solved" %}
+                                <td style="color:green">Solved</td>
+                            
+                            {% elif ticket.status == "pending" %}
+                                <td style="color:yellow">Pending</td>
+
+                            {% elif ticket.status == "onhold" %}
+                                <td style="color:yellow">On-hold</td>
+
+                            {% elif ticket.status == "close" %}
+                                <td style="color:red">Close</td>
+                            
+                            {% else %}
+                                <td style="color:red">Status error</td>
+                            {% endif %}
+                        
+                        
+                        
+                        <td>{{ ticket.requestID }}</td>
+                        <td>{{ ticket.assignID }}</td>
+                        <td>{{ ticket.subject }}</td>
+                        <td>{{ ticket.tags }} </td>
+                      
+                    </tr>
+                {% endfor %}
+                {% endblock content %}
+            </table>
+            <ul class="justify-content-center">{{ pagination.links }}</ul>
+        </div>
+    {% endblock %}
+  
