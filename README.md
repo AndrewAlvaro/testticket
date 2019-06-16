@@ -1,7 +1,7 @@
 # testticket
 -----Installation-----
 
-*iOS only*
+*MacOS only*
 
 Install Homebrew...
 - Open terminal
