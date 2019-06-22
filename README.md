@@ -6,7 +6,7 @@
 Install Homebrew...
 - Open terminal
 - Install homebrew with the following command "curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install"
-- Add this line "export PATH="/usr/local/opt/python/libexec/bin:$PATH" into the ~/profile file
+- Add this line "export PATH="/usr/local/opt/python/libexec/bin:$PATH" into the ~/.bash_profile file by using text editor eg. vim, vi or nano
 
 Install Python3...
 - Install Python3 with the following command "brew install python3"
